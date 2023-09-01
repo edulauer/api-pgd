@@ -12,15 +12,15 @@ fief-init-env:
 
 .PHONY: fief-configure-instance
 fief-configure-instance:
-	docker-compose exec -T web sh -c "cd ./init && python configure_fief.py"
+	docker compose exec -T web sh -c "cd ./init && python configure_fief.py"
 
 .PHONY: up
 up:
-	docker-compose up
+	docker compose up
 
 .PHONY: down
 down:
-	docker-compose down
+	docker compose down
 
 .PHONY: tests
 tests:
