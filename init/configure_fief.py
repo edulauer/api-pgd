@@ -25,8 +25,8 @@ port = os.environ.get("PORT")
 response = fief_admin.client_add_redirect_uri(
     uri=f"{scheme}://{hostname}:{port}/docs/oauth2-redirect"
 )
-print (f"{scheme}://{hostname}:{port}/docs/oauth2-redirect")
-response.raise_for_status()
+uri =f"{scheme}://{hostname}:{port}/docs/oauth2-redirect"
+response.raise_for_status(uri)
 
 # Add custom user fields
 response = fief_admin.create_user_field(
