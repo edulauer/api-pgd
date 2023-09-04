@@ -25,7 +25,7 @@ jobs:
     - name: Initialize environment variables
       run: ./init/load_fief_env.sh --user-email api-pgd@nonexisting.gov.br --user-password=123456*abcdef
     - name: Run all service containers
-      run: docker --network data compose up -d --scale pgadmin=0 --wait --wait-timeout 90
+      run: docker compose up -d --scale pgadmin=0 --wait --wait-timeout 90
     - name: curl
       run: docker run --rm --network data curlimages/curl:latest http://fief:8000
     - name: Configure Fief at runtime
