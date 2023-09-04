@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Add hosts to /etc/hosts
-      run: sudo echo "127.0.0.1 fief" | sudo tee -a /etc/hosts && more /etc/hosts
+      run: sudo echo "127.0.1.1 fief" | sudo tee -a /etc/hosts && more /etc/hosts
     - name: Initialize environment variables
       run: ./init/load_fief_env.sh --user-email api-pgd@nonexisting.gov.br --user-password=123456*abcdef
     - name: Run all service containers
