@@ -38,6 +38,8 @@ services:
       - FIEF_MAIN_ADMIN_API_KEY=${FIEF_MAIN_ADMIN_API_KEY}
     command:
       ./run_after_db.py "cd src && uvicorn api:app --host 0.0.0.0 --port 5057 --reload"
+    networks:  
+      - data
   fief:
     image: ghcr.io/fief-dev/fief:latest
     depends_on:
@@ -70,6 +72,8 @@ services:
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
       - DATABASE_NAME=${FIEF_DB}
       - TELEMETRY_ENABLED=False
+    networks:  
+      - data
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
@@ -83,3 +87,5 @@ services:
     volumes:
       - ./pgadmin_data/servers.json:/pgadmin4/servers.json
       - ./pgadmin_data/pgadmin:/var/lib/pgadmin
+networks:
+  data:  
