@@ -27,7 +27,7 @@ jobs:
     - name: Run all service containers
       run: docker compose up -d --scale pgadmin=0 --wait --wait-timeout 90
     - name: curl
-      run: docker exec web curl -s http://fief:8000
+      run: docker exec api-pgd-web-1 curl -s http://fief:8000
     - name: Configure Fief at runtime
       run: make fief-configure-instance
     - name: Run tests
