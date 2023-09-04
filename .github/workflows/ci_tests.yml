@@ -20,14 +20,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Add hosts to /etc/hosts
-      run: sudo echo "127.0.1.1 fief" | sudo tee -a /etc/hosts && more /etc/hosts
+    - name: Create docker network
+      run: docker network create data
     - name: Initialize environment variables
       run: ./init/load_fief_env.sh --user-email api-pgd@nonexisting.gov.br --user-password=123456*abcdef
     - name: Run all service containers
-      run: docker compose up -d --scale pgadmin=0 --wait --wait-timeout 90
-    - name: curl fief
-      run: curl http://localhost:8000
+      run: docker compose up -d --network data --scale pgadmin=0 --wait --wait-timeout 90
+    - name: curl
+      run: docker run --rm --network data curlimages/curl:latest http://fief:8000
     - name: Configure Fief at runtime
       run: make fief-configure-instance
     - name: Run tests
